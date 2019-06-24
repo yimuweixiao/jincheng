@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>金成劳务有限公司-官网</title>
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/main.css" />
+	</head>
+	<body>
+	<div th:replace="header :: html"></div>
+		<div id="center" class="container-fluid">
+			<div class="row">
+				<div id="carousel" class="carousel slide col-md-8 col-md-offset-2 pleft-0 pright-0">
+					<!-- 轮播（Carousel）指标 -->
+					<!-- 		<ol class="carousel-indicators">
+						<li data-target="#carousel" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel" data-slide-to="1"></li>
+						<li data-target="#carousel" data-slide-to="2"></li>
+					</ol> -->
+					<!-- 轮播（Carousel）项目 -->
+					<div class="carousel-inner">
+						<th:block th:each="secWheel,iterStat:${session.secImgLise}">
+							<div th:if="${iterStat.index eq 0}" class="item active">
+								<img th:src="@{${secWheel.url}}" th:alt="${secWheel.name}"/>
+							</div>
+							<div th:unless="${iterStat.index eq 0}" class="item">
+								<img th:src="@{${secWheel.url}}" th:alt="${secWheel.name}"/>
+							</div>
+						</th:block>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 pleft-0 pright-0 ptop-2">
+					<div class="col-md-2 pleft-0">
+						<h5>&gt;关于我们</h5>
+						<div class="nav-left">
+							<ul>
+								<li><a onclick="main_gszl_change(1)">营业执照</a></li>
+								<li><a onclick="main_gszl_change(2)">企业资质证书</a></li>
+								<li><a onclick="main_gszl_change(3)">设施许可证</a></li>
+								<li><a onclick="main_gszl_change(4)">维修许可证</a></li>
+								<li><a onclick="main_gszl_change(5)">安全生产许可证</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-10 pright-0">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<p class="panel-title text-center">公司资历</p>
+							</div>
+							<div class="panel-body panel-body-font">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title text-center" id="mian_gsry_name">
+											企业法人营业执照
+										</h3>
+									</div>
+									<div class="panel-body text-center">
+										<img th:src="@{${main_gszl_yyzz}}" width="450" height="637" id="mian_gsry_img" />
+										<div id="mian_gsry_others"></div>
+										<div id="mian_gsry_others2"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row main-yjzs text-center">
+				<div><img src="img/yjzs.jpg"/></div>
+				<div id="marquee1" class="marqueeleft">
+					<div style="width:6000px;">
+						<ul id="marquee1_1">
+							<li th:each="bottomWheel:${session.bottomWheelList}">
+								<a class="pic" th:href="@{'/yjzsDetail?id='+${bottomWheel.id}}"><img width="135"
+																					 height="140"
+																					 th:src="@{${bottomWheel.imgUrl}}"></a>
+								<div class="txt"><a th:href="@{'/yjzsDetail?id='+${bottomWheel.id}}" th:text="${bottomWheel.name}"></a></div>
+							</li>
+						</ul>
+						<ul id="marquee1_2"></ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	<div th:replace="foot :: html"></div>
+
+	</body>
+
+	<script th:inline="javascript">
+		function main_gszl_change(item) {
+			var main_gszl_yyzz=[[${main_gszl_yyzz}]];
+
+			var main_gszl_qyzz=[[${main_gszl_qyzz}]];
+			var main_gszl_qyzz_others1=[[${main_gszl_qyzz_others1}]];
+			var main_gszl_qyzz_others2=[[${main_gszl_qyzz_others2}]];
+			var main_gszl_qyzz_others3=[[${main_gszl_qyzz_others3}]];
+
+			var main_gszl_ssxk=[[${main_gszl_ssxk}]];
+
+			var main_gszl_wxxk_others1=[[${main_gszl_wxxk_others1}]];
+			var main_gszl_wxxk_others2=[[${main_gszl_wxxk_others2}]];
+			var main_gszl_wxxk_others3=[[${main_gszl_wxxk_others3}]];
+
+			var main_gszl_scxk=[[${main_gszl_scxk}]];
+
+			if (item == '1') {
+				$("#mian_gsry_img").show();
+				$("#mian_gsry_name").text("企业法人营业执照");
+				$("#mian_gsry_img").attr('src',main_gszl_yyzz);
+				$("#mian_gsry_img").attr('width', 450);
+				$("#mian_gsry_img").attr('height', 637);
+				$("#mian_gsry_others").html("");
+			} else if (item == '2') {
+				$("#mian_gsry_img").show();
+				$("#mian_gsry_name").text("企业资质证书");
+				$("#mian_gsry_img").attr('src', main_gszl_qyzz);
+				$("#mian_gsry_img").attr('width', 500);
+				$("#mian_gsry_img").attr('height', 353);
+				$("#mian_gsry_others").html(
+					"<img src='"+main_gszl_qyzz_others1+"' width='250' height='345'/><img src='"+main_gszl_qyzz_others2+"' width='250' height='345'/><img src='"+main_gszl_qyzz_others3+"' width='250' height='345'/>"
+				);
+			} else if (item == '3') {
+				$("#mian_gsry_img").show();
+				$("#mian_gsry_name").text("承装（修、试）电力设施许可证");
+				$("#mian_gsry_img").attr('src', main_gszl_ssxk);
+				$("#mian_gsry_img").attr('width', 500);
+				$("#mian_gsry_img").attr('height', 353);
+				$("#mian_gsry_others").html("");
+			} else if (item == '4') {
+				$("#mian_gsry_name").text("特种设备安装改造维修许可证（压力管道、压力容器、锅炉）");
+				$("#mian_gsry_img").hide();
+				$("#mian_gsry_others").html(
+					"<img src='"+main_gszl_wxxk_others1+"' width='230' height='326'/><img src='"+main_gszl_wxxk_others2+"' width='230' height='326'/><img src='"+main_gszl_wxxk_others3+"' width='230' height='326'/>"
+				);
+			} else if (item == '5') {
+				$("#mian_gsry_img").show();
+				$("#mian_gsry_name").text("安全生产许可证");
+				$("#mian_gsry_others").html("");
+				$("#mian_gsry_img").attr('src', main_gszl_scxk);
+				$("#mian_gsry_img").attr('width', 700);
+				$("#mian_gsry_img").attr('height', 498);
+			}
+		}
+	</script>
+</html>

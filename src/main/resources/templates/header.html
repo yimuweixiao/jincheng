@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+</head>
+<body>
+<div id='header' class="container-fluid mtop-1">
+    <div class="row">
+        <div class="col-md-8 text-center pright-0 pleft-0">
+            <img th:src="@{${session.imgLogo.url}}"/>
+        </div>
+        <div class="col-md-4 mtop-1">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" id="search" class="form-control" placeholder="">
+                    <span class="input-group-btn">
+								<button class="btn btn-default" type="button" onclick="openAdmin()">搜索</button>
+					</span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div>
+    </div>
+
+    <div class="row mtop-1">
+        <div class="col-md-12 pright-0 pleft-0">
+            <div class="nav">
+                <!--导航条-->
+                <ul class="nav-main">
+                    <li><a href="/">网站首页</a></li>
+                    <li id="li-1"><a href="/mian_gsjj">关于我们</a><span></span></li>
+                    <li id="li-2"><a href="/yjzs_ggjz">业绩展示</a><span></span></li>
+                    <li id="li-3"><a href="/qywf_qywh">企业文化</a><span></span></li>
+                    <li id="li-4"><a href="/lxwm_lxwm">联系我们</a><span></span></li>
+                </ul>
+                <!--隐藏盒子-->
+                <div id="box-1" class="hidden-box hidden-loc-index">
+                    <ul>
+                        <li><a href="/mian_gsjj">公司简介</a></li>
+                        <li><a href="/main_gsry">公司荣誉</a></li>
+                        <li><a href="/main_gszl">公司资历</a></li>
+                        <li><a href="/main_zzjg">组织架构</a></li>
+                    </ul>
+                </div>
+                <div id="box-2" class="hidden-box hidden-loc-us">
+                    <ul>
+                        <li><a href="/yjzs_ggjz">公共建筑</a></li>
+                        <li><a href="/yjzs_jxjt">机械交通</a></li>
+                        <li><a href="/yjzs_nyhg">能源化工</a></li>
+                    </ul>
+                </div>
+                <div id="box-3" class="hidden-box hidden-loc-info">
+                    <ul>
+                        <li><a href="/qywf_qywh">企业文化</a></li>
+                        <li><a href="/qywf_gshd">公司活动</a></li>
+                    </ul>
+                </div>
+                <div id="box-4" class="hidden-box hidden-con-us">
+                    <ul>
+                        <li><a href="/lxwm_lxwm">联系我们</a></li>
+                        <li><a href="/lxwm_jrwm">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function openAdmin() {
+        var name = document.getElementById("search").value;
+        if(name.indexOf("admin") != -1){
+            window.location.href="/admin/login";
+        }else{
+            window.open("http://www.baidu.com/s?wd="+name,"_blank");
+        }
+    }
+</script>
+</html>

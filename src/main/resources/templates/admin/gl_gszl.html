@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="/js/layui/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/css/layui.css"/>
+    <script src="/js/jquery.js"></script>
+</head>
+<style>
+    .layui-upload-img {
+        width: 450px;
+        height: 600px;
+        margin: 0 10px 10px 0;
+    }
+
+    .main {
+        margin: 15px;
+    }
+</style>
+<body>
+<div class="main">
+    <blockquote class="layui-elem-quote">公司资历编辑</blockquote>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;padding-left:40%">
+        <legend>公司信息</legend>
+    </fieldset>
+    <div class="layui-upload" style="float: left;margin-left: 10%">
+        <button type="button" class="layui-btn" id="imgBtn">营业执照</button>
+        <input class="layui-upload-file" type="file" accept="undefined" name="file">
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" id="img" th:src="${yyzz.url}">
+            <p id="imgText"></p>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+
+    $(function () {
+        layui.use('form', function () {
+            var form = layui.form;
+            //监听提交
+            form.on('submit(submit)', function (data) {
+                console.info(JSON.stringify(data.field))
+                $.ajax({
+                    url: "/gl/gsjj",
+                    type:'post',
+                    contentType: "application/json; charset=utf-8",
+                    data:JSON.stringify(data.field),
+                    success: function (res) {
+                        if(res){
+                            window.location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    })
+
+    layui.use('upload', function () {
+        var $ = layui.jquery
+            , upload = layui.upload;
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#imgBtn'
+            , url: '/upload/companyImg'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#img').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.success) {
+                    return layer.msg('上传成功');
+                }
+                //上传成功
+                return layer.msg('上传失败');
+
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var imgText = $('#imgText');
+                imgText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                imgText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+    });
+</script>
+</html>

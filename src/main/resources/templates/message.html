@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>金成劳务有限公司-官网</title>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+<script type="text/javascript">
+    //设定倒数秒数
+    var count = 3;
+    //写一个方法，显示倒数秒数  数到0后跳转页面
+    function countDown(){
+        //将count显示在div中
+        document.getElementById("div1").innerHTML="账号错误，正在返回首页。"+count;
+        //没执行一次，count减1
+        count -= 1;
+        //count=0时，跳转页面
+        if(count==0){
+            location.href="/";
+            //window.location.href="index.html";
+        }
+        //每秒执行一次,showTime()
+        setTimeout("countDown()",1000);
+    }
+    //执行countDown方法
+    countDown();
+</script>
+</html>

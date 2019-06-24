@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>金成劳务有限公司-官网</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+</head>
+<body>
+<div th:replace="header :: html"></div>
+
+<div id="center" class="container-fluid">
+    <div class="row">
+        <div id="carousel" class="carousel slide col-md-8 col-md-offset-2 pleft-0 pright-0">
+            <!-- 轮播（Carousel）指标 -->
+            <!-- 		<ol class="carousel-indicators">
+                <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel" data-slide-to="1"></li>
+                <li data-target="#carousel" data-slide-to="2"></li>
+            </ol> -->
+            <!-- 轮播（Carousel）项目 -->
+            <div class="carousel-inner">
+                <th:block th:each="secWheel,iterStat:${session.secImgLise}">
+                    <div th:if="${iterStat.index eq 0}" class="item active">
+                        <img th:src="@{${secWheel.url}}" th:alt="${secWheel.name}"/>
+                    </div>
+                    <div th:unless="${iterStat.index eq 0}" class="item">
+                        <img th:src="@{${secWheel.url}}" th:alt="${secWheel.name}"/>
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 pleft-0 pright-0 ptop-2">
+            <div class="col-md-2 pleft-0">
+                <h5>&gt;业绩展示</h5>
+                <div class="nav-left">
+                    <ul>
+                        <li><a href="/yjzs_ggjz">公共建筑</a></li>
+                        <li><a href="/yjzs_jxjt">机械交通</a></li>
+                        <li><a href="/yjzs_nyhg">能源化工</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10 pright-0">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <p class="panel-title text-center">业绩展示</p>
+                    </div>
+                    <div class="panel-body panel-body-font text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center" th:text="${yjzs_name}"></h3>
+                            </div>
+                            <div class="panel-body text-center mtop-1">
+                                <div class="col-md-6" style="height:240px"  th:each="achievement:${achievementPageInfo.getList()}">
+                                    <a th:href="@{'/yjzsDetail?id='+${achievement.id}}"><img th:src="@{${achievement.imgUrl}}" width="280"
+                                                                          height="170" class="img-thumbnail"/></a>
+                                    <p th:text="${achievement.name}"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="text-right pright-1">
+                        <ul class="pagination">
+                            <li><a th:if="${achievementPageInfo.hasPreviousPage} == true"
+                                   th:href="@{'/main_gsry?pageNum='+${achievementPageInfo.getPrePage()}}">&laquo;</a>
+                            </li>
+                            <th:block th:each="page: ${achievementPageInfo.navigatepageNums}">
+                                <li th:class="${page==achievementPageInfo.pageNum}?'active':''"><a
+                                        th:href="@{'/main_gsry?pageNum='+${page}}"
+                                        th:text="${page}"></a></li>
+                            </th:block>
+
+                            <li><a th:if="${achievementPageInfo.hasNextPage} == true"
+                                   th:href="@{'/main_gsry?pageNum='+${achievementPageInfo.getNextPage()}}">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row main-yjzs text-center">
+        <div><img src="img/yjzs.jpg"/></div>
+        <div id="marquee1" class="marqueeleft">
+            <div style="width:6000px;">
+                <ul id="marquee1_1">
+                    <li th:each="bottomWheel:${session.bottomWheelList}">
+                        <a class="pic" th:href="@{'/yjzsDetail?id='+${bottomWheel.id}}"><img width="135"
+                                                                             height="140"
+                                                                             th:src="@{${bottomWheel.imgUrl}}"></a>
+                        <div class="txt"><a th:href="@{'/yjzsDetail?id='+${bottomWheel.id}}" th:text="${bottomWheel.name}"></a></div>
+                    </li>
+                </ul>
+                <ul id="marquee1_2"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="foot :: html"></div>
+</body>
+
+</html>

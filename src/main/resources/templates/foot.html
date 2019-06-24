@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+</head>
+<body>
+
+<div id="foot" class="main-foot text-center">
+    <font th:text="'地址:'+${session.company.address}+ '&nbsp;&nbsp;邮箱：'+${session.company.mailbox}+ '&nbsp;&nbsp;电话：'+${session.company.mobile}"></font>
+    <a href="http://www.miitbeian.gov.cn/" target="_blank">
+        <font color="#ffffff">苏ICP备05068546号</font>
+    </a>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32050802010392">
+        <font color="#ffffff">苏公网安备32050802010392号</font>
+    </a>
+    <img src="http://w2.0208.cn/suanshebei/pic/201701141484358868036.png" border="0" alt="">
+</div>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/main.js"></script>
+<script src="http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

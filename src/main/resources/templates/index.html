@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>金成劳务有限公司-官网</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+</head>
+<body>
+<div th:replace="header :: html"></div>
+
+<div id="center" class="container-fluid">
+    <div class="row">
+        <div id="carousel" class="carousel slide col-md-8 col-md-offset-2 pleft-0 pright-0">
+            <!-- 轮播（Carousel）指标 -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel" data-slide-to="1"></li>
+                <li data-target="#carousel" data-slide-to="2"></li>
+            </ol>
+            <!-- 轮播（Carousel）项目 -->
+            <div class="carousel-inner">
+                <th:block th:each="indexWheel,iterStat:${wheelList}">
+                    <div th:if="${iterStat.index eq 0}" class="item active">
+                        <img th:src="@{${indexWheel.url}}" th:alt="${indexWheel.name}"/>
+                        <!-- 	<div class="carousel-caption">标题 1</div> -->
+                    </div>
+                    <div th:unless="${iterStat.index eq 0}" class="item">
+                        <img th:src="@{${indexWheel.url}}" th:alt="${indexWheel.name}"/>
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="carousel slide col-md-8 col-md-offset-2 pleft-0 pright-0">
+            <div class="col-md-6 pleft-0 pright-0">
+                <div>
+                    <div class="col-md-1 pleft-0 pright-0">
+                        <img src="img/xwdt.png" width="50" height="50"/>
+                    </div>
+                    <div class="col-md-11 pleft-0 pright-0">
+                        <h4 class="main-xwgs-h text-center">新闻动态</h4>
+
+                    </div>
+                </div>
+                <div class="main-xwgs-l">
+                    <ul th:if="${success}">
+                        <li th:each="indexNews:${newsList}"><a th:href="@{${indexNews.url}}"
+                                                               th:text="${indexNews.title}"
+                                                               target="_blank">
+                        </a><span style="float: right" th:text="${indexNews.date}"></span>
+                            <p style="background: url(img/line.gif); height: 3px;"></p>
+
+                        </li>
+                        <br>
+                        <p align="right"><a class="lan" href="http://daily.zhihu.com/story"
+                                            target="_blank">详细内容&gt;&gt;</a></p>
+                    </ul>
+                    <div th:unless="${success}" class="text-center">
+                        <img src="img/sjyc.png" width="100" height="100"/>
+                        <p>获取数据失败,请检查你的网络状态。</p>
+                        <br>
+                        <p align="right"><a class="lan" href="http://daily.zhihu.com/story"
+                                            target="_blank">详细内容&gt;&gt;</a></p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-6 pleft-0 pright-0">
+                <div class="col-md-1 pleft-0 pright-0">
+                    <img src="img/gsjj.png" width="40" height="50"/>
+                </div>
+                <div class="col-md-11 pleft-0 pright-0">
+                    <h4 class="main-xwgs-h text-center">公司简介</h4>
+                    <div class="col-md-8 pleft-0 pright-0 main-xwgs-l">
+                        <p th:text="${session.company.introduce}"></p>
+                        <br>
+                        <p align="right"><a href="/mian_gsjj" class="lan">详细内容&gt;&gt;</a></p>
+                    </div>
+                    <div class="col-md-4 pleft-0 pright-0">
+                        <img th:src="@{${session.company.imgBase.url}}" width="100%"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row main-yjzs text-center">
+        <div><img src="img/yjzs.jpg"/></div>
+        <div id="marquee1" class="marqueeleft">
+            <div style="width:6000px;">
+                <ul id="marquee1_1">
+                    <li th:each="bottomWheel:${session.bottomWheelList}">
+                        <a class="pic" th:href="@{'/yjzsDetail?id='+${bottomWheel.id}}"><img width="135"
+                                                                             height="140"
+                                                                             th:src="@{${bottomWheel.imgUrl}}"></a>
+                        <div class="txt"><a th:href="@{'/yjzsDetail?id='+${bottomWheel.id}}" th:text="${bottomWheel.name}"></a></div>
+                    </li>
+                </ul>
+                <ul id="marquee1_2"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="foot :: html"></div>
+</body>
+</html>
